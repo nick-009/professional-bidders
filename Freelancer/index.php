@@ -451,6 +451,8 @@ membership($freelancer->data()->freelancerid);
     <script src="../assets/js/bootstrap.min.js" type="text/javascript"></script>
     <!-- AdminLTE App -->
     <script src="../assets/js/app.min.js" type="text/javascript"></script>  
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jstimezonedetect/1.0.4/jstz.min.js">
+</script>
 
 	 <script type="text/javascript" language="JavaScript">
 	<!-- Copyright 2002 Bontrager Connection, LLC
@@ -497,16 +499,18 @@ membership($freelancer->data()->freelancerid);
 	timerRunning = false;
 	}
 	function showtime () {
-	var now = new Date();
-	var hours = now.getHours();
-	var minutes = now.getMinutes();
-	var seconds = now.getSeconds()
-	var timeValue = "" + ((hours >12) ? hours -12 :hours)
-	if (timeValue == "0") timeValue = 12;
-	timeValue += ((minutes < 10) ? ":0" : ":") + minutes
-	timeValue += ((seconds < 10) ? ":0" : ":") + seconds
-	timeValue += (hours >= 12) ? " P.M." : " A.M."
-	document.clock.face.value = timeValue;
+    var tz = jstz.determine(); // Determines the time zone of the browser client
+    var timezone = tz.name();
+	var now = new Date().toLocaleTimeString("en-US", {timeZone:timezone });
+	// var hours = now.getHours();
+	// var minutes = now.getMinutes();
+	// var seconds = now.getSeconds()
+	// var timeValue = "" + ((hours >12) ? hours -12 :hours)
+	// if (timeValue == "0") timeValue = 12;
+	// timeValue += ((minutes < 10) ? ":0" : ":") + minutes
+	// timeValue += ((seconds < 10) ? ":0" : ":") + seconds
+	// timeValue += (hours >= 12) ? " P.M." : " A.M."
+	document.clock.face.value = now;
 	timerID = setTimeout("showtime()",1000);
 	timerRunning = true;
 	}

@@ -71,7 +71,8 @@ if (!$freelancer->isLoggedIn()) {
                     <thead>
                       <tr>
 					   <th><?php echo $lang['title']; ?></th>
-					   <th><?php echo $lang['category']; ?></th>
+						 <th><?php echo $lang['category']; ?></th>
+						 <th><?php echo $lang['skills']; ?></th>
 					   <th><?php echo $lang['budget']; ?></th>
 					   <th><?php echo $lang['start']; ?> <?php echo $lang['date']; ?></th>
 					   <th><?php echo $lang['end']; ?> <?php echo $lang['date']; ?></th>
@@ -110,7 +111,8 @@ if (!$freelancer->isLoggedIn()) {
 												
 					    echo '<tr>';
 					    echo '<td>'.$link.'</td>';
-					    echo '<td>'. escape($name1) .'</td>';
+							echo '<td>'. escape($name1) .'</td>';
+							echo '<td>'. escape($row->skills) .'</td>';
 					    echo '<td>'. $currency_symbol .' '. escape($row->budget) .'</td>';
 					    echo '<td>'. escape($row->start_date) .'</td>';
 					    echo '<td>'. escape($row->end_date) .'</td>';

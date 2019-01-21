@@ -157,7 +157,7 @@ if(!file_exists('core/frontinit.php')){
 		  <?php		
 		  
             $searchterm = Input::get('searchterm'); 
-            $q2 = DB::getInstance()->get("category", "*", ["name[~]" => $searchterm]);
+            $q2 = DB::getInstance()->get("category", "*",["OR"=>["name[~]" => $searchterm,"sub_category[~]" => $searchterm]]);
 		    if($q2->count()){
 		    	foreach ($q2->results() as $r2) {
 					$catid = $r2->catid;

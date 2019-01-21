@@ -1068,7 +1068,7 @@ if (Input::exists()) {
 			    <label><?php echo $lang['title']; ?></label>
                <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-info"></i></span>
-                <input type="text" id="title" class="form-control" placeholder="<?php echo $lang['title']; ?>"/>
+                <input type="text" id="title" class="form-control" required placeholder="<?php echo $lang['title']; ?>"/>
                </div>
               </div>      
                
@@ -3385,7 +3385,7 @@ if (Input::exists()) {
 				data: form_data,   
 				success: function(data){
 			        // close the popup
-			        $("#addfile").modal("hide");
+			      //  $("#addfile").modal("hide");
 				}
 		 });		
 		
