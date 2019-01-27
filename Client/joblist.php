@@ -15,7 +15,7 @@ if (!$client->isLoggedIn()) {
   Redirect::to('../index.php');	
 }
 
- require_once 'stripe/_config.php';
+ //require_once 'stripe/_config.php';
 ?>
 <!DOCTYPE html>
 <html lang="en-US" class="no-js">
@@ -99,126 +99,126 @@ if (!$client->isLoggedIn()) {
                     </thead>
                     <tbody>
 				    <?php
-                    //  $query = DB::getInstance()->get("job", "*", ["AND" => ["clientid" => $client->data()->clientid, "invite" => 0, "delete_remove" => 0], "ORDER" => "date_added DESC"]);
-                    //  if($query->count()) {
-					// 	foreach($query->results() as $row) {
+                     $query = DB::getInstance()->get("job", "*", ["AND" => ["clientid" => $client->data()->clientid, "invite" => 0, "delete_remove" => 0], "ORDER" => "date_added DESC"]);
+                     if($query->count()) {
+						foreach($query->results() as $row) {
 							
-					//     $q1 = DB::getInstance()->get("category", "*", ["catid" => $row->catid]);
-					// 	if ($q1->count()) {
-					// 		 foreach ($q1->results() as $r1) {
-					// 		  $name1 = $r1->name;	
-					// 	     }
-					// 	}
+					    $q1 = DB::getInstance()->get("category", "*", ["catid" => $row->catid]);
+						if ($q1->count()) {
+							 foreach ($q1->results() as $r1) {
+							  $name1 = $r1->name;	
+						     }
+						}
 
 
-					// 	 $q = DB::getInstance()->get("job", "*", ["AND"=> ["jobid" => $row->jobid, "accepted" => 1]]);	
-					// 	 if($q->count() === 1) {
-					// 	  $link .='<a href="jobboard.php?a=overview&&id='. escape($row->jobid) .'">'. escape($row->title) .'</a>'; 
-					// 	  $view .='
-					//       <a href="jobboard.php?a=overview&&id='. escape($row->jobid) .'" class="btn btn-primary btn-xs" data-toggle="tooltip" title="' . $lang['view'] . ' ' . $lang['job'] . '"><span class="fa fa-eye"></span></a>'; 
-					// 	  $delete .='';
-					// 	  $pay .='';
+						 $q = DB::getInstance()->get("job", "*", ["AND"=> ["jobid" => $row->jobid, "accepted" => 1]]);	
+						 if($q->count() === 1) {
+						  $link .='<a href="jobboard.php?a=overview&&id='. escape($row->jobid) .'">'. escape($row->title) .'</a>'; 
+						  $view .='
+					      <a href="jobboard.php?a=overview&&id='. escape($row->jobid) .'" class="btn btn-primary btn-xs" data-toggle="tooltip" title="' . $lang['view'] . ' ' . $lang['job'] . '"><span class="fa fa-eye"></span></a>'; 
+						  $delete .='';
+						  $pay .='';
 						 	
-					// 	 }else {
-					// 	  $link .='<a href="../jobpost.php?title='. escape($row->slug) .'" target="_blank">'. escape($row->title) .'</a>';
-					// 	  $view .='
-					//       <a href="../jobpost.php?title='. escape($row->slug) .'" target="_blank" class="btn btn-primary btn-xs" data-toggle="tooltip" title="' . $lang['view'] . ' ' . $lang['job'] . '"><span class="fa fa-eye"></span></a>'; 
-					// 	  $delete .='
-					//       <a href="editjob.php?id=' . escape($row->jobid) . '" class="btn btn-success btn-xs" data-toggle="tooltip" title="' . $lang['edit'] . '"><span class="fa fa-edit"></span></a>
-					//       <a id="' . escape($row->id) . '" class="btn btn-danger btn-xs" data-toggle="tooltip" title="' . $lang['delete'] . '"><span class="fa fa-trash"></span></a>';  
+						 }else {
+						  $link .='<a href="../jobpost.php?title='. escape($row->slug) .'" target="_blank">'. escape($row->title) .'</a>';
+						  $view .='
+					      <a href="../jobpost.php?title='. escape($row->slug) .'" target="_blank" class="btn btn-primary btn-xs" data-toggle="tooltip" title="' . $lang['view'] . ' ' . $lang['job'] . '"><span class="fa fa-eye"></span></a>'; 
+						  $delete .='
+					      <a href="editjob.php?id=' . escape($row->jobid) . '" class="btn btn-success btn-xs" data-toggle="tooltip" title="' . $lang['edit'] . '"><span class="fa fa-edit"></span></a>
+					      <a id="' . escape($row->id) . '" class="btn btn-danger btn-xs" data-toggle="tooltip" title="' . $lang['delete'] . '"><span class="fa fa-trash"></span></a>';  
 						  			
-	                //         if(!$row->public == 1):
-					// 	    $public = '
-					// 	    <a id="' . escape($row->id) . '" class="btn btn-kafe btn-xs" data-toggle="tooltip" title="' . $lang['make'] . ' ' . $lang['public'] . '"><span class="fa fa-globe"></span></a>';
-					// 		else:
-					// 	    $public = '<a id="' . escape($row->id) . '" class="btn btn-warning btn-xs" data-toggle="tooltip" title="' . $lang['hide'] . ' ' . $lang['from'] . ' ' . $lang['public'] . '"><span class="fa fa-user-secret"></span></a>';
-					// 		endif;	
+	                        if(!$row->public == 1):
+						    $public = '
+						    <a id="' . escape($row->id) . '" class="btn btn-kafe btn-xs" data-toggle="tooltip" title="' . $lang['make'] . ' ' . $lang['public'] . '"><span class="fa fa-globe"></span></a>';
+							else:
+						    $public = '<a id="' . escape($row->id) . '" class="btn btn-warning btn-xs" data-toggle="tooltip" title="' . $lang['hide'] . ' ' . $lang['from'] . ' ' . $lang['public'] . '"><span class="fa fa-user-secret"></span></a>';
+							endif;	
 								
-	                //         if(!$row->active == 1):
-					// 	    $mark = '
-					// 	    <a id="' . escape($row->id) . '" class="btn btn-info btn-xs" data-toggle="tooltip" title="' . $lang['activate'] . '"><span class="fa fa-check-square"></span></a>';
-					// 		else:
-					// 	    $mark = '<a id="' . escape($row->id) . '" class="btn btn-default btn-xs" data-toggle="tooltip" title="' . $lang['deactivate'] . '"><span class="fa fa-close"></span></a>';
-					// 		endif;
+	                        if(!$row->active == 1):
+						    $mark = '
+						    <a id="' . escape($row->id) . '" class="btn btn-info btn-xs" data-toggle="tooltip" title="' . $lang['activate'] . '"><span class="fa fa-check-square"></span></a>';
+							else:
+						    $mark = '<a id="' . escape($row->id) . '" class="btn btn-default btn-xs" data-toggle="tooltip" title="' . $lang['deactivate'] . '"><span class="fa fa-close"></span></a>';
+							endif;
 							
-	                //         if(!$row->featured == "1"):
-					// 	    $pay = '
+	                        if(!$row->featured == "1"):
+						    $pay = '
 						      
-					// 		<form action="stripe/boost_job.php?id=' . escape($row->jobid) . '" method="POST">
-					// 		  <script
-					// 		    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-					// 		    data-key="'. $stripe[publishable] .'"
-					// 		    data-name="' . $lang['job'] . ' ' . $lang['payments'] . '"
-					// 		    data-description="' . $lang['boost'] . ' ' . $lang['payments'] . '"
-					// 		    data-currency="'.$currency_code.'"
-					// 		    data-email="'. $client->data()->email .'"
-					// 		    data-amount="'. getMoneyAsCents($jobs_cost) .'"
-					// 		    data-locale="auto">
-					// 		  </script>
-					// 		</form>		
-					// 		<br/>
-					// 	    <a href="paypal/boost_job.php?id=' . escape($row->jobid) . '" class="btn btn-success btn-xs">' . $lang['pay'] . ' ' . $lang['with'] . ' ' . $lang['paypal'] . '</a>';
-					// 		else:
-					// 	    $pay = '
-					// 	    <a href="paymentlist.php" class="btn btn-info btn-xs">' . $lang['view'] . ' ' . $lang['payment'] . '</a>';
-					// 		endif;								
+							<form action="stripe/boost_job.php?id=' . escape($row->jobid) . '" method="POST">
+							  <script
+							    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+							    data-key="'. $stripe[publishable] .'"
+							    data-name="' . $lang['job'] . ' ' . $lang['payments'] . '"
+							    data-description="' . $lang['boost'] . ' ' . $lang['payments'] . '"
+							    data-currency="'.$currency_code.'"
+							    data-email="'. $client->data()->email .'"
+							    data-amount="'. getMoneyAsCents($jobs_cost) .'"
+							    data-locale="auto">
+							  </script>
+							</form>		
+							<br/>
+						    <a href="paypal/boost_job.php?id=' . escape($row->jobid) . '" class="btn btn-success btn-xs">' . $lang['pay'] . ' ' . $lang['with'] . ' ' . $lang['paypal'] . '</a>';
+							else:
+						    $pay = '
+						    <a href="paymentlist.php" class="btn btn-info btn-xs">' . $lang['view'] . ' ' . $lang['payment'] . '</a>';
+							endif;								
 							
-					// 	 }						
+						 }						
 												
-					//     echo '<tr>';
-					//     echo '<td>'.$link.'</td>';
-					//     echo '<td>'. escape($name1) .'</td>';
-					//     echo '<td>'. $currency_symbol .' '. escape($row->budget) .'</td>';
-					//     echo '<td>'. escape($row->start_date) .'</td>';
-					//     echo '<td>'. escape($row->end_date) .'</td>';
-					//     echo '<td>'. escape($row->country) .'</td>';
+					    echo '<tr>';
+					    echo '<td>'.$link.'</td>';
+					    echo '<td>'. escape($name1) .'</td>';
+					    echo '<td>'. $currency_symbol .' '. escape($row->budget) .'</td>';
+					    echo '<td>'. escape($row->start_date) .'</td>';
+					    echo '<td>'. escape($row->end_date) .'</td>';
+					    echo '<td>'. escape($row->country) .'</td>';
 						
-					//     if (escape($row->public) == 1) {
-					//     echo '<td><span class="label label-success"> ' . $lang['public'] . ' </span> </td>';
-					// 	} else {
-					//     echo '<td><span class="label label-success"> ' . $lang['not_public'] . ' </span> </td>';
-					// 	}
+					    if (escape($row->public) == 1) {
+					    echo '<td><span class="label label-success"> ' . $lang['public'] . ' </span> </td>';
+						} else {
+					    echo '<td><span class="label label-success"> ' . $lang['not_public'] . ' </span> </td>';
+						}
 						
-					//     if ($row->accepted === "2") :
-					//     echo '<td><span class="label label-success"> ' . $lang['declined'] . ' </span> </td>';
-                    //     elseif($row->accepted === "1"):
-					//     echo '<td><span class="label label-success"> ' . $lang['assigned'] . ' </span> </td>';
-                    //     elseif($row->accepted === "0"):
-					//     echo '<td><span class="label label-success"> ' . $lang['waiting'] . ' ' . $lang['to'] . ' ' . $lang['be'] . ' ' . $lang['assigned'] . ' </span> </td>';
-					// 	endif;
+					    if ($row->accepted === "2") :
+					    echo '<td><span class="label label-success"> ' . $lang['declined'] . ' </span> </td>';
+                        elseif($row->accepted === "1"):
+					    echo '<td><span class="label label-success"> ' . $lang['assigned'] . ' </span> </td>';
+                        elseif($row->accepted === "0"):
+					    echo '<td><span class="label label-success"> ' . $lang['waiting'] . ' ' . $lang['to'] . ' ' . $lang['be'] . ' ' . $lang['assigned'] . ' </span> </td>';
+						endif;
 						
-					//     if (escape($row->active) == 1) {
-					//     echo '<td><span class="label label-success"> ' . $lang['active'] . ' </span> </td>';
-					// 	} else {
-					//     echo '<td><span class="label label-success"> ' . $lang['in_active'] . ' </span> </td>';
-					// 	}
+					    if (escape($row->active) == 1) {
+					    echo '<td><span class="label label-success"> ' . $lang['active'] . ' </span> </td>';
+						} else {
+					    echo '<td><span class="label label-success"> ' . $lang['in_active'] . ' </span> </td>';
+						}
 
-					//     if (escape($row->featured) == 1) {
-					//     echo '<td><span class="label label-success"> ' . $lang['featured'] . ' </span> </td>';
-					// 	} else {
-					//     echo '<td><span class="label label-success"> ' . $lang['not'] . ' ' . $lang['featured'] . '</span> </td>';
-					// 	}
+					    if (escape($row->featured) == 1) {
+					    echo '<td><span class="label label-success"> ' . $lang['featured'] . ' </span> </td>';
+						} else {
+					    echo '<td><span class="label label-success"> ' . $lang['not'] . ' ' . $lang['featured'] . '</span> </td>';
+						}
 
-                    //     echo '<td>'.$pay.'</td>';
+                        echo '<td>'.$pay.'</td>';
 						
-					//     echo '<td>
-					//       <a href="proposallist.php?id=' . escape($row->jobid) . '" class="btn btn-m btn-xs" data-toggle="tooltip" title="' . $lang['view'] . ' ' . $lang['proposals'] . '"><span class="fa fa-eye"></span></a>
-					//       '.$delete.'
-					//       '.$public.'
-					//       '.$view.'
-                    //        </td>';
-					//     echo '</tr>';
-					// 	unset($delete);
-					// 	unset($public);
-					// 	unset($mark);
-					// 	unset($link);
-					// 	unset($view);
-					// 	unset($pay);
-					//    }
-					// }else {
-					// 	echo $lang['no_results'];
-					// }
-			        // ?>
+					    echo '<td>
+					      <a href="proposallist.php?id=' . escape($row->jobid) . '" class="btn btn-m btn-xs" data-toggle="tooltip" title="' . $lang['view'] . ' ' . $lang['proposals'] . '"><span class="fa fa-eye"></span></a>
+					      '.$delete.'
+					      '.$public.'
+					      '.$view.'
+                           </td>';
+					    echo '</tr>';
+						unset($delete);
+						unset($public);
+						unset($mark);
+						unset($link);
+						unset($view);
+						unset($pay);
+					   }
+					}else {
+						echo $lang['no_results'];
+					}
+			        ?>
                     </tbody>
                     <tfoot>
                       <tr>

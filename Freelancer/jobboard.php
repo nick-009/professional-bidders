@@ -1080,7 +1080,7 @@ if (Input::exists()) {
                <div style="position:relative;">
                 <a class='btn btn-success' href='javascript:;'>
 	            <?php echo $lang['choose']; ?> <?php echo $lang['file']; ?>...
-	            <input type="file" id="photoimg" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="file_source" size="40"  onchange='$("#upload-file-info").html($(this).val());'>
+	            <input type="file" id="photoimg"  required style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="file_source" size="40"  onchange='$("#upload-file-info").html($(this).val());'>
                 <input type="hidden" name="image_name" id="image_name"/>
                 </a>
                 &nbsp;
@@ -1179,7 +1179,7 @@ if (Input::exists()) {
 						
 					    echo '<td>'. escape(strftime("%b %d, %Y, %H : %M %p ", strtotime($row->date_added))) .'</td>';
 					    echo '<td>
-					      <a href="'. escape($row->fileupload) .'" class="btn btn-success btn-xs" data-toggle="tooltip" title="' . $lang['download'] . '"><span class="fa fa-download"></span></a>
+					      <a href="'. escape($row->fileupload) .'"  target= "_blank" class="btn btn-success btn-xs" data-toggle="tooltip" title="' . $lang['download'] . '"><span class="fa fa-download"></span></a>
 					      <a onclick="getFileDetails('.$row->id.')" class="btn btn-success btn-xs" data-toggle="tooltip" title="' . $lang['edit'] . '"><span class="fa fa-edit"></span></a>
 					      <a id="' . escape($row->id) . '" class="btn btn-danger btn-file btn-xs" data-toggle="tooltip" title="' . $lang['delete'] . '"><span class="fa fa-trash"></span></a>
                           </td>';
@@ -1223,7 +1223,7 @@ if (Input::exists()) {
 			    <label><?php echo $lang['title']; ?></label>
                <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-info"></i></span>
-                <input type="text" id="update_title" class="form-control" placeholder="<?php echo $lang['title']; ?>"/>
+                <input type="text" id="update_title" required class="form-control" placeholder="<?php echo $lang['title']; ?>"/>
                </div>
               </div>      
               

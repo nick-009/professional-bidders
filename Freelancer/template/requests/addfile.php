@@ -70,7 +70,7 @@ if (!$freelancer->isLoggedIn()) {
 	
  } else {
 	 $title = $_POST['title'];
-	  Session::put("notFile", $title);
+	//  Session::put("notFile", $title);
      
  }
  

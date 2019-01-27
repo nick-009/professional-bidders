@@ -147,7 +147,7 @@ if (!$client->isLoggedIn()) {
 					    if($row->completed === '1'):
 						echo '<td><span class="label label-success"> ' . $lang['job'] . ' ' . $lang['completed'] . ' </span></td>';
 						else:
-						echo '<td><span class="label label-success"> ' . $lang['on'] . ' ' . $lang['progress'] . ' </span></td>';
+						echo '<td><span class="label label-success"> ' . ucwords($lang['in']) . ' ' . $lang['progress'] . ' </span></td>';
 						endif;		
 						
 					    echo '<td>'. escape(strftime("%b %d, %Y, %H : %M %p ", strtotime($row->date_added))) .'</td>';
@@ -264,7 +264,7 @@ if (!$client->isLoggedIn()) {
                   <div class="row">
                     <div class="col-md-12">
                       <p class="text-center">
-                        <strong><?php echo $lang['finance']; ?> : January, <?php year_now(); ?> - December, <?php year_now(); ?></strong>
+                        <strong><?php echo $lang['finance']; ?> : January, <?php echo date("Y"); ?>  - December, <?php echo date("Y"); ?></strong>
                       </p>
                       <div class="chart">
                       	
