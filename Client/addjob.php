@@ -120,7 +120,8 @@ if (Input::exists()) {
     <!-- Include header.php. Contains header content. -->
     <?php include ('template/header.php'); ?> 
     <!-- Bootstrap Datetimepicker CSS -->
-    <link href="../assets/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.min.css">
+    <!-- <link href="../assets/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" /> -->
     <!-- Bootstrap Select CSS-->
     <link  href="../assets/css/bootstrap-select.css" rel="stylesheet" type="text/css" />
 
@@ -480,7 +481,7 @@ if (Input::exists()) {
 
 				  <div class="form-group">
                    <label for="dtp_input1"><?php echo $lang['estimated']; ?> <?php echo $lang['start']; ?> <?php echo $lang['date']; ?></label>
-                    <div class="input-group date form_datetime_start" data-date-format="dd MM yyyy" data-link-field="dtp_input1">
+                    <div class="input-group date form_datetime_start" data-date-format="DD MMMM YYYY" data-link-field="dtp_input1">
                     <input name="start_date" class="form-control" type="text" value="" readonly>
                     <span class="input-group-addon"><i class="glyphicon glyphicon-remove"></i></span>
 					<span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
@@ -492,7 +493,7 @@ if (Input::exists()) {
                   
 				  <div class="form-group">
                    <label for="dtp_input1"><?php echo $lang['estimated']; ?> <?php echo $lang['end']; ?> <?php echo $lang['date']; ?></label>
-                    <div class="input-group date form_datetime_end" data-date-format="dd MM yyyy" data-link-field="dtp_input1">
+                    <div class="input-group date form_datetime_end" data-date-format="DD MMMM YYYY" data-link-field="dtp_input1">
                     <input name="end_date" class="form-control" type="text" value="" readonly>
                     <span class="input-group-addon"><i class="glyphicon glyphicon-remove"></i></span>
 					<span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
@@ -501,8 +502,7 @@ if (Input::exists()) {
 		           <input name="mirror_field_start" type="hidden" id="mirror_field_start" class="form-control" readonly />
 		           <input name="mirror_field_start_date" type="hidden" id="mirror_field_start_date" class="form-control" readonly />
                   </div> 
-                  
-
+                 
 				  <div class="form-group">	
 				    <label><?php echo $lang['job']; ?> <?php echo $lang['skills']; ?></label>
 				   <div class="input-group">
@@ -574,11 +574,16 @@ if (Input::exists()) {
     <script src="../assets/js/bootstrap.min.js" type="text/javascript"></script>
     <!-- AdminLTE App -->
     <script src="../assets/js/app.min.js" type="text/javascript"></script>
-    <!-- Datetime Picker -->
-    <script src="../assets/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>        
+<script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.4.0/lang/en-gb.js"></script>
+
+    <!-- Datetime Picker --><script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/3.0.0/js/bootstrap-datetimepicker.min.js"></script>
+    <!-- <script src="../assets/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js" type="text/javascript"></script> -->
+
+
     <script type="text/javascript">
      $('.form_datetime_start').datetimepicker({
-        //language:  'fr',
+        language:  'fr',
         weekStart: 1,
         todayBtn:  1,
 		autoclose: 1,
@@ -593,10 +598,10 @@ if (Input::exists()) {
         linkField: "mirror_field_start",
         linkFormat: "hh:ii",
         linkFieldd: "mirror_field_start_date",
-        linkFormatt: "dd MM yyyy"
+		linkFormatt: "DD MMMM YYYY"
     });
      $('.form_datetime_end').datetimepicker({
-        //language:  'fr',
+        language:  'fr',
         weekStart: 1,
         todayBtn:  1,
 		autoclose: 1,
@@ -604,16 +609,23 @@ if (Input::exists()) {
 		startView: 2,
 		forceParse: 0,
         showMeridian: 1, 
-        startDate: new Date(),
         pickTime: false, 
         minView: 2,      
         pickerPosition: "bottom-left",
         linkField: "mirror_field_start",
         linkFormat: "hh:ii",
         linkFieldd: "mirror_field_start_date",
-        linkFormatt: "dd MM yyyy"
+		linkFormatt: "DD MMMM YYYY"
     });
+	
+        $(".form_datetime_start").on("dp.change", function (e) {
+            $('.form_datetime_end').data("DateTimePicker").setMinDate(e.date);
+        });
+        $(".form_datetime_end").on("dp.change", function (e) {
+            $('.form_datetime_start').data("DateTimePicker").setMaxDate(e.date);
+        });
    </script>
+  
     <!-- Summernote WYSIWYG-->
     <script src="../assets/js/summernote.min.js" type="text/javascript"></script>    
     <script>
